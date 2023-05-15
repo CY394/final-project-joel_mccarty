@@ -1,0 +1,23 @@
+` `MediaWiki Kubernetes Build Guide
+
+This build guide is designed to teach users step by step how to construct and deploy their MediaWiki solution via Kubernetes. For this guide, we will be running Ubuntu Linux and using the Kubernetes command line.
+
+A NOTE ON SOFTWARE VERSIONS:
+
+Our machine is currently running on Ubuntu 22.04.2 LTS. If you are using a newer version of Ubuntu, ensure it is an LTS version to ensure compatibility with the product. While Kubernetes and MediaWiki are relatively robust, we cannot guarantee all parts are compatible with new or unsupported Ubuntu distributions.
+
+To update a Kubernetes API, use the patch command. Taken from the Kubernetes documentation, the command to do so is as follows:
+
+kubectl patch (-f FILENAME | TYPE NAME) -p PATCH
+
+` `Attached in the solution are the following files:
+
+Deployment.yaml- contains the specifications for the  automation of the deployment, such as where to pull the MediaWiki image and what port the deployment will be on.
+
+Service.yaml- contains the automation for how the deployment will expose the network application.
+
+1. First, modify the included deployment file to pull the image from your desired location. In our deployment, we are pulling the MediaWiki image from the EECSNET proxy.
+1. Once modified, apply the deployment using the command “kubectly apply -f deployment.yaml”. This will create the mediawiki deployment.
+1. Then apply the service.yaml file by using the same command above.
+1. From there use the command “kubectl get nodes -o yaml” to find the external IP address of the deployment. Surf to this IP address and set up your wiki!
+
